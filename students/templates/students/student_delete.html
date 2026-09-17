@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Delete Student | Student Management</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #fffaf7;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .delete-card {
+        width: 90%;
+        max-width: 450px;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        color: #4a3b3b;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #777;
+        margin-bottom: 25px;
+        line-height: 1.6;
+      }
+
+      .student-name {
+        font-weight: bold;
+        color: #d16b86;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      button,
+      a {
+        padding: 12px 20px;
+        border-radius: 10px;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .delete-button {
+        background: #d16b86;
+        color: white;
+      }
+
+      .cancel-button {
+        background: #f1e8e8;
+        color: #4a3b3b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="delete-card">
+      <h1>Delete Student?</h1>
+
+      <p>
+        Are you sure you want to delete
+        <span class="student-name">{{ student.name }}</span>? This action cannot
+        be undone.
+      </p>
+
+      <div class="buttons">
+        <a href="{% url 'student-list' %}" class="cancel-button"> Cancel </a>
+
+        <form method="POST">
+          {% csrf_token %}
+
+          <button type="submit" class="delete-button">Yes, Delete</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

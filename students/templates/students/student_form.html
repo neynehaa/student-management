@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Add Student | Student Management</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #faf7f8;
+        color: #3f3639;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 650px;
+        margin: 0 auto;
+        padding: 60px 0;
+      }
+
+      .back-link {
+        text-decoration: none;
+        color: #a56f7f;
+        font-size: 14px;
+      }
+
+      .header {
+        margin-top: 25px;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 30px;
+        font-weight: 600;
+        color: #332b2e;
+      }
+
+      .header p {
+        margin-top: 8px;
+        color: #9a8d92;
+        font-size: 14px;
+      }
+
+      .form-card {
+        background: white;
+        border: 1px solid #eee3e6;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(100, 70, 80, 0.05);
+      }
+
+      .form-group {
+        margin-bottom: 22px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #5c5055;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid #e5d9dd;
+        border-radius: 11px;
+        outline: none;
+        font-size: 14px;
+        color: #3f3639;
+        background: #fdfbfc;
+      }
+
+      .form-group input:focus {
+        border-color: #d9a7b5;
+        box-shadow: 0 0 0 3px rgba(217, 167, 181, 0.12);
+      }
+
+      .error {
+        margin-top: 6px;
+        color: #c56d7d;
+        font-size: 12px;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .cancel-button,
+      .submit-button {
+        padding: 12px 20px;
+        border-radius: 11px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .cancel-button {
+        background: #f4edef;
+        color: #806f76;
+        border: none;
+      }
+
+      .submit-button {
+        background: #d9a7b5;
+        color: white;
+        border: none;
+      }
+
+      .submit-button:hover {
+        background: #c993a3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <a href="{% url 'student-list' %}" class="back-link">
+        ← Back to Students
+      </a>
+
+      <div class="header">
+        <h1>Add New Student</h1>
+        <p>Enter the student's information below.</p>
+      </div>
+
+      <div class="form-card">
+        <form method="POST">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label for="{{ form.name.id_for_label }}"> Name </label>
+
+            {{ form.name }} {% for error in form.name.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.email.id_for_label }}"> Email </label>
+
+            {{ form.email }} {% for error in form.email.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.age.id_for_label }}"> Age </label>
+
+            {{ form.age }} {% for error in form.age.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.address.id_for_label }}"> Address </label>
+
+            {{ form.address }} {% for error in form.address.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="actions">
+            <a href="{% url 'student-list' %}" class="cancel-button">
+              Cancel
+            </a>
+
+            {% if is_update %}
+            <button type="submit" class="submit-button">Update Student</button>
+            {% else %}
+            <button type="submit" class="submit-button">Add Student</button>
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
